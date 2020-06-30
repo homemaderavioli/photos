@@ -1,76 +1,26 @@
 import React from 'react';
 import './App.css';
-
-type PhotoProps = {
-  url: string;
-  alt: string;
-};
-
-class Photo extends React.PureComponent<PhotoProps> {
-  render = () => (
-    <div className="Photo"><img src={this.props.url} alt={this.props.alt}></img></div>
-  );
-}
-
-type PhotoGridProps = {
-  initialIndex: number,
-  photos: string[],
-};
-
-type PhotoGridState = {
-  photoIndex: number,
-};
-
-class PhotoGrid extends React.Component<PhotoGridProps, PhotoGridState> {
-  state: PhotoGridState = {
-    photoIndex: this.props.initialIndex,
-  };
-
-  render = () => {
-    return (
-      <div className="PhotoGrid">
-        <Photo url={this.props.photos[this.state.photoIndex]} alt="alt" />
-        <div className="prev" onClick={() => this.prev(this.props.photos.length)}></div>
-        <div className="next" onClick={() => this.next(this.props.photos.length)}></div>
-      </div>
-    );
-  }
-
-  next = (len: number): void => {
-    this.setState((state => ({
-      photoIndex: (state.photoIndex + 1) % len,
-    })));
-  };
-
-  prev = (len: number): void => {
-    this.setState((state => ({
-      photoIndex: state.photoIndex - 1 < 0 ? (len - 1) : state.photoIndex - 1,
-    })));
-  };
-}
+import PhotoGrid from './Photo'
 
 const App = () => {
-  const photos:string[] = [
-    "pics/DSC_0668.jpg",
-    "pics/DSC_0553.jpg",
-    "pics/DSC_0549.jpg",
-    "pics/DSC_0384.jpg",
-    "pics/darling-harbour.jpg",
-    "pics/door.jpg",
-    "pics/DSC_0016.jpg",
+  const BASE_IMAGES_URL = `${process.env.PUBLIC_URL}/assets/images`
+  const PHOTOS:string[] = [
+    `${BASE_IMAGES_URL}/DSC_0668.jpg`,
+    `${BASE_IMAGES_URL}/DSC_0553.jpg`,
+    `${BASE_IMAGES_URL}/DSC_0549.jpg`,
+    `${BASE_IMAGES_URL}/DSC_0384.jpg`,
+    `${BASE_IMAGES_URL}/darling-harbour.jpg`,
+    `${BASE_IMAGES_URL}/door.jpg`,
+    `${BASE_IMAGES_URL}/DSC_0016.jpg`,
   ];
-  const intitialIndex = Math.floor(Math.random() * Math.floor(photos.length))
+  const INITIAL_INDEX = Math.floor(Math.random() * Math.floor(PHOTOS.length))
 
   return (
     <div className="App">
       <header className="App-header">
         <div className="title"><h1>photos</h1></div>
-        <div className="menu"><ul><li></li></ul></div>
       </header>
-      <PhotoGrid
-        initialIndex={intitialIndex}
-        photos={photos}
-      />
+      <PhotoGrid initialIndex={INITIAL_INDEX} photos={PHOTOS} />
     </div>
   );
 }
