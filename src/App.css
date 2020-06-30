@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  margin-left: 1vh;
+  margin-right: 1vh;
 }
 
 .App-logo {
@@ -14,14 +16,44 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 5vh;
+  flex-direction: row;
+  z-index: 1001;
+}
+
+.App-header > .title {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 1vh;
+}
+.App-header > .menu {
+  display: flex;
+  align-items: center;
+  padding: 1vh;
+}
+
+.App-header > .title > h1 {
+  display: flex;
+  color: black;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+.App-header > .menu > ul {
+  display: flex;
+  list-style-type: none;
+  color: black;
+  margin: 0;
+}
+
+.App-header > .menu > ul > li {
+  padding: 1vh;
 }
 
 .App-link {
@@ -35,4 +67,38 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.PhotoGrid {
+  width: 100%;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.PhotoGrid .prev {
+  z-index: 1000;
+  background-color: rgba(0, 0, 255, 0);
+  grid-area: 1 / 1 / 2 / 2;
+}
+.PhotoGrid .next {
+  z-index: 1000;
+  background-color: rgba(0, 255, 0, 0);
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+.Photo {
+  overflow: hidden;
+  grid-area: 1 / 1 / 2 / 3;
+}
+.Photo > img {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: #E1E2E1;
 }
